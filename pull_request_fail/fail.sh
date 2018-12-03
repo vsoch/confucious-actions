@@ -86,6 +86,7 @@ post_message() {
 check_runs() {
 
     RESPONSE=$(get_url "${RUNS_URL}")
+    echo ${RESPONSE}
     RUNS=$(echo "${RESPONSE}" | jq --raw-output '.check_runs | .[] | {name: .name, status: .status, conclusion: .conclusion} | @base64')
 
     # We have to keep looping if in progress
@@ -127,16 +128,16 @@ check_runs() {
             exit 0
         fi
 
+        # If we got in progress checks then sleep and loop again.
+        if [[ "${INPROGRESS}" -eq 1 ]]; then
+            echo "A watched pot never boils! Sleeping..."
+            sleep 3
+
+            # Continue calling self until we exit.
+            check_runs;
+        fi
+
     done
-
-    # If we got in progress checks then sleep and loop again.
-    if [[ "${INPROGRESS}" -eq 1 ]]; then
-        echo "A watched pot never boils! Sleeping..."
-        sleep 3
-
-        # Continue calling self until we exit.
-        check_runs;
-    fi
 
     # If we make it here, we didn't hit a fail result, or in progress
     # Delete the confuscious comment if it exists to refresh the pull request
