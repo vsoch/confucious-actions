@@ -79,8 +79,10 @@ post_message() {
     echo "GitHub Confucious Action Say:" > ${WISDOM_FILE}
     /entrypoint.sh --message >> ${WISDOM_FILE}
     WISDOM=$(cat ${WISDOM_FILE})
-
-    curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -d '{"body":"${WISDOM}"}' -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
+    echo ${WISDOM}
+    WISDOM={"body":"${WISDOM}"}
+    echo ${WISDOM}
+    curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -d "${WISDOM}" -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
 }
 
 check_runs() {
