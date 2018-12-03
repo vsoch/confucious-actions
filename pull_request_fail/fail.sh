@@ -42,9 +42,6 @@ check_credentials() {
         exit 1
     fi
 
-    # Validate the GitHub token.
-    curl -o /dev/null -sSL -H "${AUTH_HEADER}" -H "${HEADER}" "${REPO_URL}"; || { response_fail; }
-
 }
 
 check_events_json() {
