@@ -111,7 +111,7 @@ check_runs() {
         echo "Current state is ${STATE}";
 
         if [[ "${STATE}" == "in_progress" ]]; then
-            echo "Pull Request checks are still in progress.";
+            echo "Pull request checks are still in progress.";
             INPROGRESS=1
             continue
         fi
@@ -127,16 +127,16 @@ check_runs() {
             exit 0
         fi
 
-	# If we got in progress checks then sleep and loop again.
-        if [[ "${INPROGRESS}" == "1" ]]; then
-            echo "A watched pot never boils! Sleeping..."
-            sleep 3
-
-            # Continue calling self until we exit.
-            check_runs;
-	fi
-
     done
+
+    # If we got in progress checks then sleep and loop again.
+    if [[ "${INPROGRESS}" -eq 1 ]]; then
+        echo "A watched pot never boils! Sleeping..."
+        sleep 3
+
+        # Continue calling self until we exit.
+        check_runs;
+    fi
 
     # If we make it here, we didn't hit a fail result, or in progress
     # Delete the confuscious comment if it exists to refresh the pull request
@@ -164,7 +164,7 @@ main () {
 }
 
 echo "==========================================================================
-      START: Running Confucious Fail Action!";
+START: Running Confucious Fail Action!";
 main;
 echo "==========================================================================
-      END: Running Confucious Fail Action";
+END: Running Confucious Fail Action";
