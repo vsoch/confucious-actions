@@ -97,21 +97,29 @@ check_runs() {
     for R in ${RUNS}; do
         RUN="$(echo "${R}" | base64 --decode)"
 
+        echo "Checking run ${RUN}";
+
         # Case 1: Skip this action
         NAME=$(echo "${RUN}" | jq --raw-output '.name')
 	if [[ "${GITHUB_ACTION}" == "${NAME}" ]]; then
+            echo "Found self! Skipping ${NAME}";
             continue
 	fi
 
         # Case 2: Is it in progress?
 	STATE=$(echo "${RUN}" | jq --raw-output '.status')
+        echo "Current state is ${STATE}";
+
         if [[ "${STATE}" == "in_progress" ]]; then
+            echo "Pull Request checks are still in progress.";
             INPROGRESS=1
             continue
         fi
 
         # Case 3: Did we FAIL
 	RESULT=$(echo "${RUN}" | jq --raw-output '.conclusion')
+        echo "Current result is ${RESULT}";
+
         if [[ "${STATE}" == "completed" ]] && [[ "$RESULT" == "failure" ]]; then
             echo "Run: $NAME failure! Whomp whomp. Confuscious says..."
             clean_up;
