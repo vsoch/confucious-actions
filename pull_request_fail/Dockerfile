@@ -13,4 +13,4 @@ COPY fail.sh /fail.sh
 COPY /fail-messages.txt /messages.txt
 
 RUN chmod u+x /fail.sh
-CMD ["/fail.sh"]
+ENTRYPOINT ["/fail.sh"]
