@@ -76,10 +76,12 @@ clean_up() {
 post_message() {
 
     WISDOM_FILE=$(mktemp /tmp/wisdom.XXXXXXXXX)
-    echo "{\"body\": GitHub Confucious Action Say: " > ${WISDOM_FILE}
-    /entrypoint.sh --message >> ${WISDOM_FILE}
-    echo "\"}"
-    cat ${WISDOM_FILE}
+
+    #echo "{\"body\": GitHub Confucious Action Say: " > ${WISDOM_FILE}
+    WISDOM=$(/entrypoint.sh --message >> ${WISDOM_FILE});
+    echo ${WISDOM}
+    printf '{"body": "GitHub Confucious Action Say: \n%s"}' "${WISDOM}" > ${WISDOM_FILE}
+    cat ${WISDOM_FILE};
     curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --data-binary "@/${WISDOM_FILE}" -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
 }
 
