@@ -31,7 +31,8 @@ response_fail() {
 
 get_url() {
 
-    echo $(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${1:-}")
+    RESPONSE=$(curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" "${1:-}")
+    echo ${RESPONSE}
 }
 
 check_credentials() {
