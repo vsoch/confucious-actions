@@ -80,9 +80,7 @@ post_message() {
     /entrypoint.sh --message >> ${WISDOM_FILE}
     WISDOM=$(cat ${WISDOM_FILE})
     echo ${WISDOM}
-    WISDOM={"body":"${WISDOM}"}
-    echo ${WISDOM}
-    curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -d "${WISDOM}" -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
+    curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -d '{"body":'"${WISDOM}"'}' -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
 }
 
 check_runs() {
@@ -161,7 +159,7 @@ main () {
         check_credentials
         check_runs  # other Github actions
                     # note that if you need CircleCI to be included here,
-                    # you need to install CircleCI checks (see main README.md)
+                    # you need to install CircleCI Checks (see main README.md)
         # If we make it here, we didn't hit a fail result, or in progress
         # Delete the confuscious comment if it exists to refresh the pull request
         clean_up;
