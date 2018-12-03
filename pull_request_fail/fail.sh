@@ -86,7 +86,7 @@ post_message() {
 check_runs() {
 
     RESPONSE=$(get_url "${RUNS_URL}")
-    echo ${RESPONSE}
+
     RUNS=$(echo "${RESPONSE}" | jq --raw-output '.check_runs | .[] | {name: .name, status: .status, conclusion: .conclusion} | @base64')
 
     # We have to keep looping if in progress
@@ -138,11 +138,8 @@ check_runs() {
         fi
 
     done
-
-    # If we make it here, we didn't hit a fail result, or in progress
-    # Delete the confuscious comment if it exists to refresh the pull request
-    clean_up;
 }
+
 
 main () {
 
@@ -160,7 +157,13 @@ main () {
     # https://developer.github.com/v3/activity/events/types/#pullrequestevent
     if [[ "${ACTION}" == "opened" ]] || [[ "${ACTION}" == "synchronize" ]] ; then
         check_credentials
-        check_runs
+        check_runs  # other Github actions
+                    # note that if you need CircleCI to be included here,
+                    # you need to install CircleCI checks (see main README.md)
+        # If we make it here, we didn't hit a fail result, or in progress
+        # Delete the confuscious comment if it exists to refresh the pull request
+        clean_up;
+
     fi
 }
 

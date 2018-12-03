@@ -11,4 +11,8 @@ These actions use the
 a lovely message from Confucious to your pull requests, but only if you fail.
 See the README.md in each subfolder for usage.
 
-**under development**
+## Github Setup
+If you are checking status failures just for Github Actions, you don't need
+to take further action. However, if you are using CircleCI, you need
+to also [enable CircleCI](https://circleci.com/blog/see-the-status-of-your-circleci-workflows-in-github/)
+to return status checks, otherwise they won't be registered.
