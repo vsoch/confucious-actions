@@ -43,7 +43,7 @@ check_credentials() {
     fi
 
     # Validate the GitHub token.
-    curl -o /dev/null -sSL -H "${AUTH_HEADER}" -H "${HEADER}" "${REPO_URL}"; || response_fail
+    curl -o /dev/null -sSL -H "${AUTH_HEADER}" -H "${HEADER}" "${REPO_URL}"; || { response_fail; }
 
 }
 
