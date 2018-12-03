@@ -99,14 +99,7 @@ check_runs() {
 
         echo "Checking run ${RUN}";
 
-        # Case 1: Skip this action
-        NAME=$(echo "${RUN}" | jq --raw-output '.name')
-	if [[ "${GITHUB_ACTION}" == "${NAME}" ]]; then
-            echo "Found self! Skipping ${NAME}";
-            continue
-	fi
-
-        # Case 2: Is it in progress?
+        # Case 1: Is it in progress?
 	STATE=$(echo "${RUN}" | jq --raw-output '.status')
         echo "Current state is ${STATE}";
 
@@ -115,6 +108,13 @@ check_runs() {
             INPROGRESS=1
             continue
         fi
+
+        # Case 2: Skip this action
+        NAME=$(echo "${RUN}" | jq --raw-output '.name')
+	if [[ "${GITHUB_ACTION}" == "${NAME}" ]]; then
+            echo "Found self! Skipping ${NAME}";
+            continue
+	fi
 
         # Case 3: Did we FAIL
 	RESULT=$(echo "${RUN}" | jq --raw-output '.conclusion')
