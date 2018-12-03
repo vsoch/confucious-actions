@@ -50,13 +50,14 @@ check_events_json() {
         echo "Cannot find Github events file at ${GITHUB_EVENT_PATH}";
         exit 1;
     fi
+    echo "Found ${GITHUB_EVENT_PATH}";
 
 }
 
 clean_up() {
 
     # Get all the comments for the pull request.
-    BODY=$(get_url "${COMMENTS_URL}")
+    BODY=$(get_url "${COMMENTS_URL}");
     COMMENTS=$(echo "$BODY" | jq --raw-output '.[] | {id: .id, body: .body} | @base64')
 
     for C in ${COMMENTS}; do
@@ -139,12 +140,14 @@ main () {
     # path to file that contains the POST response of the event
     # Example: https://github.com/actions/bin/tree/master/debug
     # Value: /github/workflow/event.json
-    check_events_json
+    check_events_json;
 
     # Get the name of the action that was triggered
-    ACTION=$(jq --raw-output .action "${GITHUB_EVENT_PATH}")
-    NUMBER=$(jq --raw-output .number "${GITHUB_EVENT_PATH}")
-    COMMENTS_URL=${REPO_URL}/issues/${NUMBER}/comments
+    ACTION=$(jq --raw-output .action "${GITHUB_EVENT_PATH}");
+    NUMBER=$(jq --raw-output .number "${GITHUB_EVENT_PATH}");
+    COMMENTS_URL="${REPO_URL}/issues/${NUMBER}/comments"
+
+    echo "${ACTION}"
 
     # Only interested in newly opened 
     # https://developer.github.com/v3/activity/events/types/#pullrequestevent
@@ -154,4 +157,5 @@ main () {
     fi
 }
 
-main
+echo "Running Confucious Fail Action!";
+main;
