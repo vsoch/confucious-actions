@@ -147,15 +147,16 @@ main () {
     NUMBER=$(jq --raw-output .number "${GITHUB_EVENT_PATH}");
     COMMENTS_URL="${REPO_URL}/issues/${NUMBER}/comments"
 
-    echo "${ACTION}"
-
     # Only interested in newly opened 
     # https://developer.github.com/v3/activity/events/types/#pullrequestevent
-    if [[ "${ACTION}" == "opened" ]]; then
+    if [[ "${ACTION}" == "opened" ]] || [[ "${ACTION}" == "synchronize" ]] ; then
         check_credentials
         check_runs
     fi
 }
 
-echo "Running Confucious Fail Action!";
+echo "==========================================================================
+      START: Running Confucious Fail Action!";
 main;
+echo "==========================================================================
+      END: Running Confucious Fail Action";
