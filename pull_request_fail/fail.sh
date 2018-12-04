@@ -63,12 +63,12 @@ clean_up() {
     for C in ${COMMENTS}; do
         COMMENT="$(echo "$C" | base64 --decode)"
         COMMENT_ID=$(echo "$COMMENT" | jq --raw-output '.id')
-        COMMENT_BODY=$(echo "$comment" | jq --raw-output '.body')
+        COMMENT_BODY=$(echo "$COMMENT" | jq --raw-output '.body')
 
         # All Confuscious posts starts with this tag
 	if [[ "$COMMENT_BODY" == *"GitHub Confucious Action Say"* ]]; then
-            echo "Deleting old comment ID: $id"
-            curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -X DELETE "${REPO_URL}/issues/comments/${id}"
+            echo "Deleting old comment ID: $COMMENT_ID"
+            curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" -X DELETE "${REPO_URL}/issues/comments/${COMMENT_ID}"
         fi
     done
 }
