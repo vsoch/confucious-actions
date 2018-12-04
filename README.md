@@ -9,6 +9,14 @@ with specific action types corresponding to the subfolders. We currently have:
 These actions use the 
 [vanessa/boxes](https://www.github.com/vsoch/boxes) container to format
 a lovely message from Confucious to your pull requests, but only if you fail.
+Here are some examples!
+
+![img/action1.png](img/action1.png)
+
+![img/action2.png](img/action2.png)
+
+![img/action3.png](img/action3.png)
+
 See the README.md in each subfolder for usage.
 
 ## CircleCI Setup

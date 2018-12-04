@@ -16,3 +16,6 @@ action "post message on fail" {
   secrets = ["GITHUB_TOKEN"]
 }
 ```
+
+And don't forget to turn on [CircleCI Github Checks](https://circleci.com/blog/see-the-status-of-your-circleci-workflows-in-github/)
+if you use CircleCI, or follow steps to use [TravisCI](https://blog.travis-ci.com/2018-05-07-announcing-support-for-github-checks-api-on-travis-ci-com).
