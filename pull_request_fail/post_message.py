@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from urllib.parse import urlencode
 import requests
 import json
 import sys
@@ -49,7 +50,7 @@ data = {"body": wisdom }
 print(data)
 print(json.dumps(data).encode('utf-8'))
 response = requests.post(params['COMMENTS_URL'],
-                         data = json.dumps(data).encode('utf-8'), 
+                         data = urlencode(data), 
                          headers = headers)
 print(response.json())
 print(response.status_code)
