@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from urllib.parse import urlencode
 import requests
 import json
 import sys
@@ -43,14 +42,14 @@ print(wisdom)
 accept = "application/vnd.github.%s+json;application/vnd.github.antiope-preview+json" % params['API_VERSION']
 headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
            "Accept": accept,
-           "Content-Type": "application/json; charset=utf-8" }
+           "Content-Type": "application/json;" }
 
 wisdom = "GitHub Confucious Action Say: \n" + wisdom 
 data = {"body": wisdom }
 print(data)
 print(json.dumps(data).encode('utf-8'))
 response = requests.post(params['COMMENTS_URL'],
-                         data = urlencode(data), 
+                         json = data, 
                          headers = headers)
 print(response.json())
 print(response.status_code)
