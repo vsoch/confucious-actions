@@ -18,7 +18,7 @@ requireds = ['WISDOM_FILE',
 for required in requireds:
     
     value = os.environ.get(required)
-    if not required:
+    if required == None:
         print('Missing environment variable %s' %required)
         sys.exit(1)
 
