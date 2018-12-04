@@ -42,7 +42,7 @@ print(wisdom)
 accept = "application/vnd.github.%s+json;application/vnd.github.antiope-preview+json" % params['API_VERSION']
 headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
            "Accept": accept,
-           "Content-Type": "application/json" }
+           "Content-Type": "application/json; charset=utf-8" }
 
 wisdom = "GitHub Confucious Action Say: \n" + wisdom 
 data = {"body": wisdom }
