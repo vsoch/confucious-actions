@@ -76,7 +76,7 @@ clean_up() {
 post_message() {
 
     WISDOM_FILE=$(mktemp /tmp/wisdom.XXXXXXXXX)
-    WISDOM=$(/entrypoint.sh --message > ${WISDOM_FILE});
+    WISDOM=$(/entrypoint.sh --no-color --message > ${WISDOM_FILE});
 
     # Feeling lazy, do it with Python
     export AUTH_HEADER HEADER COMMENTS_URL API_VERSION GITHUB_TOKEN WISDOM_FILE
