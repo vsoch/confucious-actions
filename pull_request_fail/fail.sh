@@ -82,9 +82,6 @@ post_message() {
     export AUTH_HEADER HEADER COMMENTS_URL API_VERSION GITHUB_TOKEN WISDOM_FILE
     python3 /post_message.py
 
-    #printf '{"body": "GitHub Confucious Action Say: \n%s"}' "${WISDOM}" > ${WISDOM_FILE}
-    #cat ${WISDOM_FILE};
-    #curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --data-binary "@/${WISDOM_FILE}" -H "Content-Type: application/json" -X POST "${COMMENTS_URL}"
 }
 
 check_runs() {
