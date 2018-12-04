@@ -43,7 +43,10 @@ headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
 
 wisdom = "GitHub Confucious Action Say: \n" + wisdom 
 data = {"body": wisdom }
-
+print(data)
 response = requests.post(params['COMMENTS_URL'],
                          data = data, 
                          headers = headers)
+print(response.json())
+print(response.status_code)
+print(response.text)
