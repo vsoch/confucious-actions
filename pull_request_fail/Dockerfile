@@ -11,6 +11,8 @@ COPY fail.sh /fail.sh
 
 # Replaces default message for container
 COPY /fail-messages.txt /messages.txt
+COPY /post_message.py /post_message.py
 
-RUN chmod u+x /fail.sh
+RUN chmod u+x /fail.sh && \
+    chmod u+x /post_message.py
 ENTRYPOINT ["/fail.sh"]
