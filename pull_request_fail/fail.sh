@@ -79,7 +79,7 @@ post_message() {
     WISDOM=$(/entrypoint.sh --message > ${WISDOM_FILE});
 
     # Feeling lazy, do it with Python
-    export AUTH_HEADER HEADER COMMENTS_URL API_VERSION GITHUB_TOKEN
+    export AUTH_HEADER HEADER COMMENTS_URL API_VERSION GITHUB_TOKEN WISDOM_FILE
     python3 /post_message.py
 
     #printf '{"body": "GitHub Confucious Action Say: \n%s"}' "${WISDOM}" > ${WISDOM_FILE}
