@@ -44,7 +44,7 @@ headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
            "Accept": accept,
            "Content-Type": "application/json; charset=utf-8" }
 
-wisdom = "GitHub Confucious Action Say: \n```" + wisdom + "```" 
+wisdom = "GitHub Confucious Action Say: \n```\n" + wisdom + "```" 
 data = {"body": wisdom }
 print(data)
 print(json.dumps(data).encode('utf-8'))
@@ -53,4 +53,3 @@ response = requests.post(params['COMMENTS_URL'],
                          headers = headers)
 print(response.json())
 print(response.status_code)
-print(response.text)
