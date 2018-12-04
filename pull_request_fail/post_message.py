@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import requests
+import json
 import sys
 import os
 
@@ -35,6 +36,8 @@ if not os.path.exists(infile):
 with open(infile, 'r') as filey:
     wisdom = filey.read()
 
+print(wisdom)
+
 # Prepare request
 accept = "application/vnd.github.%s+json;application/vnd.github.antiope-preview+json" % params['API_VERSION']
 headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
@@ -44,8 +47,9 @@ headers = {"Authorization": "token %s" % params['GITHUB_TOKEN'],
 wisdom = "GitHub Confucious Action Say: \n" + wisdom 
 data = {"body": wisdom }
 print(data)
+print(json.dumps(data))
 response = requests.post(params['COMMENTS_URL'],
-                         data = data, 
+                         data = json.dumps(data), 
                          headers = headers)
 print(response.json())
 print(response.status_code)
