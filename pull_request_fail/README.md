@@ -55,3 +55,14 @@ jobs:
 You could change the exit code to 0 for an "always pass" pull request, or
 probably just leave it all out together :) This is fun! 
 What other bots do you want to see next?
+
+## Local Generation
+
+Do you want to generate the Pull Request Confucius messages without the PR? You
+can! You first need to grab the messages file, and then run the container as follows:
+
+
+```bash
+$ wget https://raw.githubusercontent.com/vsoch/confucious-actions/master/pull_request_fail/fail-messages.txt
+$ docker run -v $PWD:/data vanessa/boxes --message-file /data/fail-messages.txt --message
+```
