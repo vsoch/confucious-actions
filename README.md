@@ -1,6 +1,6 @@
 # Confucious Actions
 
-What could be better than a ludicous and sarcastic comment when you perform
+What could be better than a ludicrous and sarcastic comment when you perform
 some action on a Github pull request? This repository provides those actions,
 with specific action types corresponding to the subfolders. We currently have:
 
